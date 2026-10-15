@@ -23,4 +23,14 @@ public class QAController {
         
         return agente.auditar(idTemporal, prompt);
     }
+    
+    @PostMapping("/interno/perfeccionar")
+    public String perfeccionarCodigoInterno(@RequestBody String codigoCrudo) {
+        System.out.println("🤖 [QA] Recibiendo código en texto plano desde Desarrollo para perfeccionar...");
+        
+        // Mantenemos el estado stateless generando un ID único para la revisión
+        String promptQA = "Por favor perfecciona este código:\n\n" + codigoCrudo;
+        return agente.perfeccionarCodigo(java.util.UUID.randomUUID().toString(), promptQA);
+    }
+    
 }
